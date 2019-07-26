@@ -24,6 +24,7 @@ import logging
 import os
 import sys
 import unittest
+import time
 from builtins import object
 
 import hamcrest as hc
@@ -79,6 +80,7 @@ class TestPubsubMessage(unittest.TestCase):
     data = b'data'
     attributes = {'k1': 'v1', 'k2': 'v2'}
     m = PubsubMessage(data, attributes)
+    attributes.update(message_id='')#,publish_time='')
     m_converted = PubsubMessage._from_proto_str(m._to_proto_str())
     self.assertEqual(m_converted.data, data)
     self.assertEqual(m_converted.attributes, attributes)
